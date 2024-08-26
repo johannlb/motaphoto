@@ -1,0 +1,232 @@
+@charset "UTF-8";
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.03);
+  z-index: 1000;
+  overflow-y: auto;
+  height: 80px;
+  padding: 0 146px;
+}
+@media all and (max-width: 479px) {
+  header {
+    padding: 0 40px;
+    height: 72px;
+  }
+}
+@media all and (min-width: 480px) and (max-width: 768px) {
+  header {
+    padding: 0 100px;
+  }
+}
+@media all and (min-width: 769px) and (max-width: 1024px) {
+  header {
+    padding: 0 110px;
+  }
+}
+@media all and (min-width: 1441px) {
+  header {
+    padding: 0 200px;
+  }
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 216px;
+}
+@media all and (max-width: 479px) {
+  .logo img {
+    width: 138px;
+  }
+}
+
+.main-nav {
+  display: flex;
+}
+@media all and (max-width: 479px) {
+  .main-nav {
+    display: none;
+  }
+  .main-nav.active {
+    background: #E00000;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 72px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+    z-index: 999;
+  }
+}
+
+.main-nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 45px;
+}
+@media all and (max-width: 479px) {
+  .main-nav ul {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+@media all and (min-width: 480px) and (max-width: 768px) {
+  .main-nav ul {
+    gap: 15px;
+  }
+}
+
+.main-nav a {
+  color: #000;
+}
+.main-nav a:hover {
+  font-weight: 700;
+}
+@media all and (max-width: 479px) {
+  .main-nav a {
+    font-size: 2.75em;
+    color: #fff;
+  }
+}
+
+.burger {
+  display: none;
+}
+@media all and (max-width: 479px) {
+  .burger {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .burger .bar {
+    width: 100%;
+    height: 4px;
+    background-color: black;
+    transition: transform 0.3s ease-in-out;
+  }
+  .burger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .burger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .burger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
+
+/* Footer */
+/* Ajout des fonts */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/Space_Mono/SpaceMono-Regular.ttf") format("truetype");
+}
+/* Général */
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+h1 {
+  font-family: "Space Mono", sans-serif;
+  font-size: 6em;
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+@media all and (max-width: 479px) {
+  h1 {
+    font-size: 1.725em;
+  }
+}
+@media all and (min-width: 480px) and (max-width: 768px) {
+  h1 {
+    font-size: 3.5em;
+  }
+}
+@media all and (min-width: 769px) and (max-width: 1024px) {
+  h1 {
+    font-size: 4.5em;
+  }
+}
+@media all and (min-width: 1441px) {
+  h1 {
+    font-size: 8em;
+  }
+}
+
+h2 {
+  font-family: "Space Mono", sans-serif;
+  font-size: 4.125em;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1em;
+}
+@media all and (max-width: 479px) {
+  h2 {
+    font-size: 2.875em;
+  }
+}
+@media all and (min-width: 480px) and (max-width: 768px) {
+  h2 {
+    font-size: 3em;
+  }
+}
+@media all and (min-width: 1441px) {
+  h2 {
+    font-size: 5em;
+  }
+}
+
+h3 {
+  font-family: "Space Mono", sans-serif;
+  font-size: 1.125em;
+  text-transform: uppercase;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.875em;
+  font-weight: 300;
+}
+
+a, .copyright {
+  font-family: "Space Mono", sans-serif;
+  font-size: 1em;
+  text-transform: uppercase;
+  color: inherit;
+  font-weight: 400;
+}/*# sourceMappingURL=theme.css.map */
