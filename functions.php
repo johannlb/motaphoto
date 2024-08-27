@@ -1,21 +1,52 @@
 <?php
 
-function nathalie_mota_scripts() {
-    // Chargement du thème
-    wp_enqueue_style('nathalie-mota-style', get_template_directory_uri() . '/assets/sass/theme.css', array(), 1.1);
-}
+//============================
+//   Fonctions de chargement du thème
+//============================
 
+/**
+ * Chargement des styles et scripts du thème.
+ */
+function nathalie_mota_scripts() {
+    // Chargement du fichier CSS principal du thème
+    wp_enqueue_style('nathalie-mota-style', get_template_directory_uri() . '/assets/sass/theme.css', array(), '1.1');
+    // Chargement de jQuery
+    wp_enqueue_script('jquery');
+    // Chargement du script pour le menu burger
+    wp_enqueue_script('burger-js', get_stylesheet_directory_uri() . '/assets/js/burger.js', array(), time(), true);    
+    
+}
 add_action('wp_enqueue_scripts', 'nathalie_mota_scripts');
 
-// Ajouter la prise en charge des images mises en avant
-add_theme_support( 'post-thumbnails' );
+//============================
+//   Support de fonctionnalités du thème
+//============================
 
-// Ajouter automatiquement le titre du site dans l'en-tête du site
-add_theme_support( 'title-tag' ); 
-add_theme_support( 'title-tag' );
+/**
+ * Ajout du support des images mises en avant.
+ */
+add_theme_support('post-thumbnails');
 
-// Ajouter des emplacements de menus
-register_nav_menus( array(
-	'main' => 'Menu Principal',
-	'footer' => 'Menu footer',
-));
+/**
+ * Ajout du support pour le titre automatique du site dans l'en-tête.
+ */
+add_theme_support('title-tag');
+
+//============================
+//   Enregistrement des menus
+//============================
+
+/**
+ * Enregistrement des menus de navigation.
+ */
+function register_my_menus() {
+    register_nav_menus(
+        array(
+            'main-menu'   => __('Main Menu'),  // Menu principal
+            'footer-menu' => __('Footer Menu') // Menu pied de page
+        )
+    );
+}
+add_action('init', 'register_my_menus');
+
+?>
