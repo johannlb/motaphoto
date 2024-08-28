@@ -9,6 +9,12 @@
         ) );
         ?>
     </nav>
+
+
+<!-- Fonction pour appeler le template contact-modal.php -->
+<?php get_template_part('templates-part/contact-modal'); ?>
+
+
     <div class="footer-credits">
         <p>Tous droits réservés</p>
     </div>
