@@ -8,7 +8,7 @@ $refUppercase = strtoupper($reference);
 $type = get_field('type');
 $typeUppercase = mb_strtoupper ($type);
 
-// Ici on recupere les taxonomies: catégories, formats et années
+// Ici on recupere les taxonomies: catégories, formats 
 $categories = get_the_terms(get_the_ID(), 'categorie');
 $categorie = !empty($categories) ? $categories[0]->name : '';
 $categoryUppercase = mb_strtoupper($categorie);
@@ -83,6 +83,50 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
     <div class="title__suggestion">
         <h3>VOUS AIMEREZ AUSSI</h3>
     </div>
+
+    <div class="photo__similar">
+        <?php
+        // Récupère les termes de la taxonomie "categorie" associés à la publication actuelle
+        $categories = get_the_terms(get_the_ID(), 'categorie');
+        // Définit les arguments de la requête WP_Query pour récupérer les publications similaires
+        $args = array(
+            'post_type' => 'photo',
+            'posts_per_page' => 2,
+            //'post__not_in' => array(get_the_ID()),
+            'orderby' => 'rand',
+            'tax_query' => array(
+              array(
+                 'taxonomy' => 'categorie',
+                 'field' => 'slug',
+                 'terms' => $categories ? wp_list_pluck($categories, 'slug') : array(), 
+               ),
+          ),
+        );
+
+        // Supprime la clause "AND (0 = 1)" de la requête SQL généré par WP
+        add_filter('posts_where', 'remove_zero_clause_from_where');
+
+        // Crée une nouvelle instance de WP_Query avec les arguments définis
+        $query = new WP_Query($args);
+        
+        // Supprime le filtre "posts_where" pour éviter d'affecter d'autres requêtes WP_Query
+        remove_filter('posts_where', 'remove_zero_clause_from_where');
+
+        // Boucle sur les publications similaires et affiche le modèle de contenu pour chaque publication
+        if ($query->have_posts()) :
+            while ($query->have_posts()) : $query->the_post(); 
+                get_template_part('templates-part/block-photo');
+            endwhile;
+        else :
+            // Affiche un message si aucune publication similaire n'a été trouvée
+            echo '<p class="photoNotFound">Pas de photo similaire trouvée pour la catégorie.</p>';
+        endif;
+
+        // Réinitialise les données globales de la publication après la boucle
+        wp_reset_postdata();
+        ?>
+    </div>
+</section>
 
 
 <?php get_footer(); ?>

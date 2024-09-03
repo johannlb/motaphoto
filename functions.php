@@ -13,9 +13,15 @@ function nathalie_mota_scripts() {
     // Chargement de jQuery
     wp_enqueue_script('jquery');
     // Chargement du script pour le menu burger
-    wp_enqueue_script('burger-js', get_stylesheet_directory_uri() . '/assets/js/burger.js', array(), time(), true);   
+    wp_enqueue_script('burger-js', get_stylesheet_directory_uri() . '/assets/js/burger.js', array(), time(), true);  
+     // Chargement de la modale de contact
+    wp_enqueue_script('contact-modal-js', get_template_directory_uri() . '/assets/js/contact-modal.js', array(), time(), true); 
     // Chargement de scripts.js
     wp_enqueue_script('scripts-js', get_template_directory_uri() . '/assets/js/scripts.js', array(), time(), true);
+    // Chargement du script pour les miniatures
+    wp_enqueue_script('miniature-js', get_stylesheet_directory_uri() . '/assets/js/miniature.js', array('jquery'), '1.0.0', true);
+
+    
 }
 add_action('wp_enqueue_scripts', 'nathalie_mota_scripts');
 
@@ -49,5 +55,16 @@ function register_my_menus() {
     );
 }
 add_action('init', 'register_my_menus');
+
+//============================
+//   Requêtes et filtres personnalisés
+//============================
+
+/**
+ * Fonction pour retirer la clause "AND (0 = 1)" de la requête WHERE
+ */
+function remove_zero_clause_from_where($where) {
+    return str_replace("AND (0 = 1)", "", $where);
+}
 
 ?>

@@ -102,6 +102,10 @@ header {
         }
       }
 
+      .navbar__logo {
+        padding-left: 50px; // Ajuster ce padding pour les petits écrans
+      }
+
       .navbar__menu {
         display: flex !important;
         flex-direction: column;
