@@ -67,4 +67,38 @@ function remove_zero_clause_from_where($where) {
     return str_replace("AND (0 = 1)", "", $where);
 }
 
+//============================
+//   Fonction pour récupérer une image de fond aléatoire
+//============================
+
+function get_random_background_image() {
+    // Arguments de la requête pour récupérer une photo aléatoire
+    $args = array(
+        'post_type'      => 'photo',      // Type de publication : photo
+        'posts_per_page' => 1,            // Nombre de photos à récupérer (1 pour une photo aléatoire)
+        'orderby'        => 'rand',       // Tri aléatoire
+    );
+  
+    // Exécute la requête WP_Query avec les arguments
+    $photo_query = new WP_Query($args);
+  
+    // Initialise la variable pour stocker l'URL de l'image
+    $photo_url = '';
+  
+    // Vérifie s'il y a des photos dans la requête
+    if ($photo_query->have_posts()) {
+        // Boucle à travers les photos
+        while ($photo_query->have_posts()) {
+            $photo_query->the_post();
+            // Récupère l'URL de l'image mise en avant
+            $photo_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+        }
+        // Réinitialise les données post
+        wp_reset_postdata();
+    }
+  
+    // Retourne l'URL de l'image
+    return $photo_url;
+  }
+
 ?>

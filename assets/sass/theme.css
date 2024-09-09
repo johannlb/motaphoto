@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/*==========================================================================*/
+/*============================= MAIN ==============================*/
+/*==========================================================================*/
 body {
   max-width: 1440px;
   font-family: "SpaceMono-Regular", sans-serif;
@@ -56,6 +59,9 @@ html {
     opacity: 0;
   }
 }
+/*==========================================================================*/
+/*============================= HEADER ==============================*/
+/*==========================================================================*/
 header {
   display: flex;
   flex-direction: row;
@@ -216,6 +222,9 @@ header .navbar .navbar__menu .menu li a:hover {
     padding-inline: 55px;
   }
 }
+/*==========================================================================*/
+/*============================= FOOTER ==============================*/
+/*==========================================================================*/
 footer {
   background-color: #fff;
   padding: 20px 0;
@@ -274,6 +283,9 @@ footer .footer-credits {
     margin-top: -15px;
   }
 }
+/*==========================================================================*/
+/*============================= FONTS ==============================*/
+/*==========================================================================*/
 @font-face {
   font-family: "Poppins-Bold";
   font-weight: bold;
@@ -328,6 +340,9 @@ footer .footer-credits {
   font-style: normal;
   src: url("../fonts/SpaceMono-Regular.woff2") format("woff2");
 }
+/*==========================================================================*/
+/*============================= CONTACT-MODAL ==============================*/
+/*==========================================================================*/
 .popup__overlay {
   display: none; /*Masqué par défaut */
   position: fixed; /* Rester en place */
@@ -407,7 +422,9 @@ footer .footer-credits {
   width: 100%;
 }
 
-/* Styles pour single-photo.php */
+/*==========================================================================*/
+/*============================= SINGLE-PHOTO ==============================*/
+/*==========================================================================*/
 /* La galerie de photos occupe toute la largeur et est en colonne */
 .photo__gallery {
   display: flex;
@@ -1004,4 +1021,105 @@ footer .footer-credits {
   .block__photo .overlay .icon-fullscreen {
     left: 215px;
   }
+}
+
+/*==========================================================================*/
+/*============================= HERO ==============================*/
+/*==========================================================================*/
+.hero {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 800px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 40px;
+  z-index: 1;
+  animation: fadeIn 2s forwards;
+}
+@media screen and (max-width: 768px) {
+  .hero {
+    height: 250px; /* Ajustement de la hauteur pour les écrans plus petits */
+    margin-top: 50px;
+  }
+}
+.hero__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero__content h1 {
+  display: block;
+  margin: 0 auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  -webkit-text-stroke: 3px white; /* contour du texte */
+  -webkit-text-fill-color: transparent;
+  font-family: "SpaceMono-BoldItalic";
+  font-size: 4vw;
+  font-weight: 700;
+  text-transform: uppercase; /* Convertit le texte en majuscules */
+  animation: slideInFromBottom 2s forwards;
+}
+@media screen and (max-width: 768px) {
+  .hero__content h1 {
+    -webkit-text-stroke: 1px #ffffff; /* Ajustement du contour du texte pour les écrans plus petits */
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/*==========================================================================*/
+/*============================= FRONT-PAGE ==============================*/
+/*==========================================================================*/
+/* Style liste de photos de la page d'accueil */
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
+  margin-top: 43px;
+  gap: 20px; /* Espacement entre les photos */
+}
+
+.load-more-btn {
+  display: block;
+  position: relative;
+  width: 270px;
+  height: 50px;
+  line-height: 100%;
+  margin: 30px auto;
+  background-color: #d8d8d8;
+  font-family: "SpaceMono-Regular";
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 2px;
+  border: none;
+}
+.load-more-btn:hover {
+  cursor: pointer;
+  background-color: black;
+  color: #fff;
+  transition: background-color 0.6s ease-in, color 0.6s ease-in;
 }/*# sourceMappingURL=theme.css.map */
