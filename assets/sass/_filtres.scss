@@ -1,0 +1,73 @@
+/*==========================================================================*/
+/*============================= FILTRES  ==============================*/
+/*==========================================================================*/
+
+#filtres-section .filtres-container {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .custom-select {
+    width: 260px;
+    height: 43px;
+    border: 1.3px solid #b8bbc2 !important;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: transparent;
+  }
+  
+  .taxonomy-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filters-left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    width: 59%;
+  }
+  
+  .filters-right {
+    align-items: flex-end;
+    width: 29%;
+  }
+  
+  #annees {
+    margin-left: auto;
+  }
+  
+  /* CSS spécifique pour les écrans mobiles */
+  @media screen and (max-width: 768px) {
+    #filtres-section .filtres-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; /* Ajouté pour un meilleur espacement entre les filtres */
+      padding: 0 20px;
+      margin: auto;
+      width: 50%;
+    }
+  
+    .filters-left,
+    .filters-right {
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      gap: 15px;
+    }
+  
+    .custom-select,
+    #annees {
+      width: 90%;
+      margin-bottom: 15px;
+    }
+  
+    #annees {
+      margin-left: 0;
+    }
+  }

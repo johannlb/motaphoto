@@ -21,7 +21,11 @@ function nathalie_mota_scripts() {
     // Chargement du script pour les miniatures
     wp_enqueue_script('miniature-js', get_stylesheet_directory_uri() . '/assets/js/miniature.js', array('jquery'), '1.0.0', true);
 
-    
+     // Enregistrer et localiser les scripts pour Select2
+  wp_enqueue_script('select2-script', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
+  wp_enqueue_style('select2-style', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
+  wp_enqueue_script('select2-js', get_stylesheet_directory_uri() . '/assets/js/select2.js', array('jquery'), '1.0.0', true);
+
 }
 add_action('wp_enqueue_scripts', 'nathalie_mota_scripts');
 
@@ -55,6 +59,111 @@ function register_my_menus() {
     );
 }
 add_action('init', 'register_my_menus');
+
+
+//============================
+//   PAGINATION ET FILTRES
+//============================
+
+/**
+ * Enregistre les scripts nécessaires et localise les scripts pour la pagination et les filtres.
+ */
+function enqueue_load_more_photos_script() {
+    // Enregistrement des scripts nécessaires pour la pagination et les filtres.
+    wp_enqueue_script('pagination', get_stylesheet_directory_uri() . '/assets/js/pagination.js', array('jquery'), null, true);
+    wp_enqueue_script('filtres', get_stylesheet_directory_uri() . '/assets/js/filtres.js', array('jquery'), null, true);
+  
+    // Définition des paramètres AJAX communs pour être passés aux scripts.
+    $ajax_params = array(
+      'ajax_url' => admin_url('admin-ajax.php'),
+      'ajax_nonce' => wp_create_nonce('load_more_photos_nonce')
+  );
+  
+    // Localisation des scripts pour passer les paramètres AJAX aux scripts en front-end.
+    wp_localize_script('pagination', 'ajax_filtres', $ajax_params);
+    wp_localize_script('filtres', 'ajax_filtres', $ajax_params);
+  }
+  add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
+  
+  /**
+   * Traite les requêtes AJAX pour charger plus de photos.
+   */
+  function load_more_photos() {
+    // Vérification du nonce pour sécuriser la requête AJAX.
+    check_ajax_referer('load_more_photos_nonce', 'nonce'); 
+  
+    // Récupération des paramètres envoyés par la requête AJAX.
+    $offset = isset($_POST['offset']) ? absint($_POST['offset']) : 0;
+    $categorie = isset($_POST['categorie']) ? sanitize_text_field($_POST['categorie']) : '';
+    $format = isset($_POST['format']) ? sanitize_text_field($_POST['format']) : '';
+    $order = isset($_POST['order']) ? $_POST['order'] : 'DESC';
+    
+    // Configuration des arguments pour WP_Query selon les paramètres reçus.
+    $args = [
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'offset' => $offset,
+        'orderby' => 'date',
+        'order' => $order,
+        'tax_query' => []
+    ];
+  
+    // Ajout de conditions supplémentaires de taxonomie si nécessaire.
+    if (!empty($categorie) || !empty($format)) {
+        $args['tax_query']['relation'] = 'AND';
+        if (!empty($categorie)) {
+          $args['tax_query'][] = [
+            'taxonomy' => 'categorie',
+            'field' => 'slug',
+            'terms' => $categorie
+        ];
+        }
+  
+        if (!empty($format)) {
+            $args['tax_query'][] = [
+                'taxonomy' => 'format',
+                'field' => 'slug',
+                'terms' => $format
+            ];
+        }
+    }
+  
+    // Exécution de la requête WP_Query.
+    $query = new WP_Query($args);
+    $output = '';
+  
+    // Vérifie s'il y a des photos dans la requête
+    if ($query->have_posts()) {
+        // Boucle à travers les photos
+        while ($query->have_posts()) {
+            $query->the_post();
+            ob_start();
+            // Inclusion du template pour afficher un bloc de photo.
+            get_template_part('templates-part/block-photo', get_post_format()); 
+            $output .= ob_get_clean();
+        }
+  
+        // Vérification de la disponibilité d'autres photos.
+        $has_more_photos = $query->found_posts > $offset + $query->post_count;
+  
+        // Réinitialisation des données globales du post.
+        wp_reset_postdata();
+  
+        // Envoi de la réussite avec le contenu généré et l'état des photos restantes.
+        wp_send_json_success(['html' => $output, 'has_more_photos' => $has_more_photos]);
+    } else {
+        // En cas d'absence de posts, envoi d'une erreur.
+        wp_send_json_error('');
+    }
+    
+    // Arrêt de l'exécution pour retourner une réponse propre.
+    wp_die(); 
+  }
+  
+  // Ajout des actions pour les requêtes AJAX pour les utilisateurs connectés et non connectés.
+  add_action('wp_ajax_load_more_photos', 'load_more_photos');
+  add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');  
+  
 
 //============================
 //   Requêtes et filtres personnalisés

@@ -3,6 +3,12 @@
 <?php get_template_part('templates-part/hero'); ?>
 
 
+    <!-- Section pour les filtres -->
+    <section id="filtres-section"> 
+      <?php get_template_part('templates-part/filtres'); ?>
+    </section>
+
+
     <!-- Section pour afficher la liste de photos -->
     <section id="liste__photo" class="photo-grid">
         <?php get_template_part('templates-part/liste-photos'); ?>
