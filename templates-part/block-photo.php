@@ -1,6 +1,6 @@
 <?php
 // Pour récupérer l'URL de la photo
-$photoUrl = get_the_post_thumbnail_url(get_the_ID(), 'large');
+$photoUrl = get_the_post_thumbnail_url(get_the_ID(), 'full');
 
 // vérifier si l'URL de l'image mise en avant a été récupéré avec succès
 if ($photoUrl) {
@@ -22,7 +22,7 @@ if ($photoUrl) {
             <?php endif; ?>
             <div class="eye-icon">
                 <a href="<?php echo esc_url($url_post); ?>">
-                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/icon_eye.svg" alt="Voir la photo">
+                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/icon_eye.png" alt="Voir la photo">
                 </a>
             </div>
             <div class="icon-fullscreen" data-full="<?php echo esc_attr($photoUrl); ?>" data-category="<?php echo esc_attr($categorie); ?>" data-reference="<?php echo esc_attr($reference); ?>">

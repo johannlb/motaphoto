@@ -68,8 +68,8 @@ echo "<div class='taxonomy-container'>";
 echo "<select id='annees' class='custom-select annees-select'>";
 // Options spécifiques pour 'annees'
 echo "<option value=''>{$taxonomy_labels['annees']}</option>";
-echo "<option value='ASC'>A partir des plus récentes</option>";
-echo "<option value='DESC'>A partir des plus anciennes</option>";
+echo "<option value='DES'>A partir des plus récentes</option>";
+echo "<option value='ASC'>A partir des plus anciennes</option>";
 // Fin du select 
 echo "</select>";
 // Fin du conteneur pour la taxonomie 'annees'

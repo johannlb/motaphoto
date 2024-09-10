@@ -18,6 +18,11 @@
     <div class="footer-credits">
         <p>Tous droits réservés</p>
     </div>
+
+    <!-- Fonction pour appeler le template de la lightbox -->
+<?php get_template_part('templates-part/lightbox'); ?>
+
+
 </footer>
 <?php wp_footer(); ?>
 </body>
