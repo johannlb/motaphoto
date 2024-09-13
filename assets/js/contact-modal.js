@@ -1,7 +1,5 @@
 // JS pour la popup modal
 
-console.log("Le JS de la modale s'est correctement chargé");
-
 (function ($) {
   // Fonction pour ouvrir la modale
   function openModal() {

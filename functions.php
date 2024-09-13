@@ -8,26 +8,24 @@
  * Chargement des styles et scripts du thème.
  */
 function nathalie_mota_scripts() {
-    // Chargement du fichier CSS principal du thème
+
+    // CSS Principal du thème
     wp_enqueue_style('nathalie-mota-style', get_template_directory_uri() . '/assets/sass/theme.css', array(), '1.1');
-    // Chargement de jQuery
-    wp_enqueue_script('jquery');
-    // Chargement du script pour le menu burger
-    wp_enqueue_script('burger-js', get_stylesheet_directory_uri() . '/assets/js/burger.js', array(), time(), true);  
-     // Chargement de la modale de contact
+
+    // jQuery
+    wp_enqueue_script('jquery'); 
+
+    // Scripts personnalisés
+    wp_enqueue_script('burger-js', get_stylesheet_directory_uri() . '/assets/js/burger.js', array('jquery'), time(), true);  
     wp_enqueue_script('contact-modal-js', get_template_directory_uri() . '/assets/js/contact-modal.js', array(), time(), true); 
-    // Chargement de scripts.js
     wp_enqueue_script('scripts-js', get_template_directory_uri() . '/assets/js/scripts.js', array(), time(), true);
-    // Chargement du script pour les miniatures
     wp_enqueue_script('miniature-js', get_stylesheet_directory_uri() . '/assets/js/miniature.js', array('jquery'), '1.0.0', true);
-    // Chargement du script de la lightbox
     wp_enqueue_script('lightbox-js', get_stylesheet_directory_uri() . '/assets/js/lightbox.js', array(), time(), true);
 
-
-     // Enregistrer et localiser les scripts pour Select2
-  wp_enqueue_script('select2-script', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
-  wp_enqueue_style('select2-style', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
-  wp_enqueue_script('select2-js', get_stylesheet_directory_uri() . '/assets/js/select2.js', array('jquery'), '1.0.0', true);
+    // Select2 (CDN)
+    wp_enqueue_style('select2-style', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
+    wp_enqueue_script('select2-script', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0', true);
+    wp_enqueue_script('select2-js', get_stylesheet_directory_uri() . '/assets/js/select2.js', array('jquery'), '1.0.0', true);
 
 }
 add_action('wp_enqueue_scripts', 'nathalie_mota_scripts');

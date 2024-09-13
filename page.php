@@ -1,8 +1,7 @@
-<?php
-	get_header();
-	?>
+<?php get_header(); ?>
   
-  <div class="entry-content">
+<div class="container">
+    <div class="entry-content">
         <?php
             the_content();  // Affiche le contenu de la page
 
@@ -12,8 +11,6 @@
             ) );
         ?>
     </div><!-- .entry-content -->
-
-
-  
+</div> <!-- .container -->
 
 <?php get_footer(); ?>

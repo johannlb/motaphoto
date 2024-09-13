@@ -2,19 +2,21 @@
 /*============================= MAIN ==============================*/
 /*==========================================================================*/
 
-
 body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     max-width: 1440px;
     font-family: "SpaceMono-Regular", sans-serif;
     font-size: 14px;
     line-height: 1.6;
     color: #333;
     margin: auto;
-  
+
     ul {
         list-style-type: none;
     }
-  
+
     a,
     a:visited {
         color: black;
@@ -23,12 +25,23 @@ body {
         text-transform: uppercase;
         display: flex;
     }
-  
+
     a:hover {
         font-weight: bold;
     }
 }
 
+// MAIN CONTAINER
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+// CONTENT AREA
+.entry-content, .page-content {
+    flex: 1; // Permet d'occuper tout l'espace disponible
+}
 // Media Queries
 @media screen and (max-width: 768px) {
     .uagb-container-inner-blocks-wrap {

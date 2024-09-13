@@ -1,5 +1,3 @@
-// Ce message s'affichera dans la console lorsque le script JS sera chargé
-console.log("Le JS du menu burger s'est correctement chargé");
 jQuery(document).ready(function ($) {
   const menuBurger = $(".burgerMenu");
   const nav = $(".navbar__menu");

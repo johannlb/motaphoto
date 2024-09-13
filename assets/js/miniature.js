@@ -1,6 +1,3 @@
-// Affichage d'un message dans la console pour vérifier que le JS s'est correctement chargé
-console.log("Le JS des miniatures s'est correctement chargé");
-
 // Attend que le document soit prêt avant d'exécuter le code
 jQuery(document).ready(function ($) {
   // Sélectionne l'élément avec l'ID 'miniature'

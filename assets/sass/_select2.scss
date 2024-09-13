@@ -60,11 +60,11 @@
   
   /* Styles pour la dropdown */
   .select2-container--default .select2-dropdown {
-    top: -4px;
+    top: -35px;
     margin-top: 28px;
     @media screen and (max-width: 781px) {
       top: 9px;
-      margin-top: 32px;
+      margin-top: -15px;
     }
   }
   
