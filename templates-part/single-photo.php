@@ -92,7 +92,7 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
         $args = array(
             'post_type' => 'photo',
             'posts_per_page' => 2,
-            //'post__not_in' => array(get_the_ID()),
+            'post__not_in' => array(get_the_ID()),  // Exclut la photo actuelle
             'orderby' => 'rand',
             'tax_query' => array(
               array(
